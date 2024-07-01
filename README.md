@@ -1,6 +1,12 @@
-HOSPITAL MANAGEMENT SYSTEM
+# HealthConnect - Hospital Management System
 
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/h1l4bM8R)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=15356209&assignment_repo_type=AssignmentRepo)
+## Project Overview
 
-Kyle was here
+HealthConnect is a comprehensive hospital management system designed to streamline the operations of EWU Hospital. Our goal is to efficiently manage patient records, appointments, staff schedules, and medical inventories. This project has been developed to address the challenges faced by EWU Hospital due to the fragmented nature of their current systems, which hinder the synchronization of information and lead to operational inefficiencies.
+
+## Project Features
+
+- **Patient Record Management:** Securely store and manage patient information, ensuring easy access and updating by authorized personnel.
+- **Appointment Scheduling:** Simplify the process of scheduling and managing patient appointments, reducing waiting times and improving patient care.
+- **Staff Scheduling:** Efficiently manage staff schedules, ensuring optimal allocation of resources and minimizing conflicts.
+- **Medical Inventory Management:** Keep track of medical supplies and equipment, ensuring timely restocking and reducing wastage.
