@@ -1,0 +1,44 @@
+/* styles.css */
+
+/* Basic styling for the body */
+body {
+    font-family: Arial, sans-serif; /* Sets a clean, sans-serif font for the entire page */
+    margin: 0; /* Removes default margin around the body */
+    padding: 0; /* Removes default padding around the body */
+}
+
+/* Styling for the header section */
+header {
+    background-color: #333; /* Dark background color for the header */
+    color: #fff; /* White text color for the header */
+    padding: 10px 0; /* Adds padding above and below the header content */
+    position: fixed; /* Keeps the header fixed at the top of the page */
+    width: 100%; /* Makes the header span the full width of the viewport */
+    top: 0; /* Positions the header at the top of the viewport */
+    left: 0; /* Aligns the header to the left edge */
+    z-index: 1000; /* Ensures the header stays above other elements */
+}
+
+/* Styling for the navigation bar */
+.navbar {
+    display: flex; /* Uses flexbox to layout items inside the navbar */
+    justify-content: space-between; /* Distributes space evenly between items */
+    align-items: center; /* Vertically aligns items in the center */
+    padding: 0 20px; /* Adds horizontal padding inside the navbar */
+}
+
+/* Styling for navigation links */
+.nav-link {
+    color: #fff; /* Sets the text color to white */
+    text-decoration: none; /* Removes the default underline from links */
+    padding: 10px 15px; /* Adds padding around the link text */
+}
+
+/* Styling for navigation links on hover */
+.nav-link:hover {
+    background-color: #555; /* Changes the background color on hover */
+    border-radius: 5px; /* Rounds the corners of the background */
+}
+
+/* Optional: Add styles for the slider if you have one */
+

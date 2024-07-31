@@ -1,10 +1,23 @@
 <!-- templates/home.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Home Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'accounts/css/styles.css' %}">
 </head>
 <body>
-    <h1>Welcome to the Health Connect!</h1>
+    <header>
+        <nav class="navbar">
+            <a href="{% url 'home' %}" class="nav-link">Home</a>
+            <a href="{% url 'about' %}" class="nav-link">About</a>
+            <a href="{% url 'login' %}" class="nav-link">Login</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Welcome to the Home Page</h1>
+    </main>
 </body>
 </html>
