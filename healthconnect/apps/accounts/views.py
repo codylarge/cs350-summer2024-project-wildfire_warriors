@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm, PatientProfileForm, StaffProfileForm
-from .models import CustomUser
+from .models import CustomUser, PatientProfile, StaffProfile
 
 def register(request):
     if request.method == 'POST':
@@ -20,11 +20,14 @@ def register(request):
 
 def profile(request):
     user = request.user
-    if user.is_patient:
-        profile = user.patientprofile
+    if user.is_authenticated:
+        if user.is_patient:
+            profile = user.patientprofile
+        else:
+            profile = user.staffprofile
+        return render(request, 'accounts/profile.html', {'profile': profile})
     else:
-        profile = user.staffprofile
-    return render(request, 'accounts/profile.html', {'profile': profile})
+        return redirect('login')  # Redirect to login if the user is not authenticated
 
 def get_staff_role(user):
     if user.is_doctor:
@@ -34,3 +37,4 @@ def get_staff_role(user):
     elif user.is_pharmacist:
         return 'Pharmacist'
     return ''
+
