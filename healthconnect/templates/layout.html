@@ -1,0 +1,21 @@
+<!DOCTYPE = html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Title{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/styles.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{% url 'home' %}" class="nav-link">Home</a>
+        <a href="{% url 'about' %}" class="nav-link">About</a>
+        <a href="{% url 'login' %}" class="nav-link">Login</a>
+    </nav>
+    <main>
+        {% block content %}
+        Content
+        {% endblock %}
+    </main>
+</body>
