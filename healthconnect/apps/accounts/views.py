@@ -13,7 +13,11 @@ def register_view(request):
     else:
         form = CustomRegistrationForm()
 
-    return render(request, 'accounts/register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
+
+def forgot_password_view(request):
+    # Logic for forgot password
+    return render(request, 'forgot-password.html')
 
 
 """
@@ -51,7 +55,7 @@ def login_view(request):
             return redirect('profile')  # Default redirect if no role is specified
     else:
         form = AuthenticationForm()
-    return render(request, 'accounts/login.html', {'form': form})
+    return render(request, 'login.html', {'form': form})
 
 def profile(request):
     user = request.user
@@ -60,7 +64,7 @@ def profile(request):
             profile = user.patientprofile
         else:
             profile = user.staffprofile
-        return render(request, 'accounts/profile.html', {'profile': profile})
+        return render(request, 'profile.html', {'profile': profile})
     else:
         return redirect('login')  # Redirect to login if the user is not authenticated
 
@@ -78,3 +82,9 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def services(request):
+    return render(request, 'services.html')
+
+def pharmacy(request):
+    return render(request, 'pharmacy.html')

@@ -1,13 +1,9 @@
-/* styles.css */
-
-/* General body styling */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* Navbar styling */
 .navbar {
     background-color: #009259;
     padding: 1em;
@@ -16,7 +12,6 @@ body {
     justify-content: space-between;
 }
 
-/* Logo styling */
 .navbar .logo {
     margin-right: 1em;
 }
@@ -35,7 +30,7 @@ body {
 }
 
 .navbar .nav-link:hover {
-    text-decoration: none; /* Remove underline on hover */
+    text-decoration: none; 
 }
 
 /* Login button styling */
@@ -49,10 +44,10 @@ body {
 
 .navbar .login-link:hover {
     background-color: blue;
-    text-decoration: none; /* Remove underline on hover */
+    text-decoration: none; 
 }
 
-/* Login button styling */
+/* Register button styling */
 .navbar .register-link {
     background-color: #00b6ff;
     padding: 1em 5em;
@@ -63,11 +58,10 @@ body {
 
 .navbar .register-link:hover {
     background-color: blue;
-    text-decoration: none; /* Remove underline on hover */
+    text-decoration: none; 
 }
 
 
-/* Main content styling */
 main {
     padding: 2em;
 }

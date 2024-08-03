@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}
+    Login
+{% endblock %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="login-container">
+        <div class="login-box">
+            <h1>Login</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+            </form>
+            <div class="auth-links">
+                <a href="{% url 'register' %}" class="auth-link">Sign Up</a>
+                <a href="{% url 'forgot-password' %}" class="auth-link">Forgot Password</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
