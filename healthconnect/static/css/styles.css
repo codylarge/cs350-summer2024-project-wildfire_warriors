@@ -1,44 +1,89 @@
 /* styles.css */
 
-/* Basic styling for the body */
+/* General body styling */
 body {
-    font-family: Arial, sans-serif; /* Sets a clean, sans-serif font for the entire page */
-    margin: 0; /* Removes default margin around the body */
-    padding: 0; /* Removes default padding around the body */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-/* Styling for the header section */
-header {
-    background-color: #333; /* Dark background color for the header */
-    color: #fff; /* White text color for the header */
-    padding: 10px 0; /* Adds padding above and below the header content */
-    position: fixed; /* Keeps the header fixed at the top of the page */
-    width: 100%; /* Makes the header span the full width of the viewport */
-    top: 0; /* Positions the header at the top of the viewport */
-    left: 0; /* Aligns the header to the left edge */
-    z-index: 1000; /* Ensures the header stays above other elements */
-}
-
-/* Styling for the navigation bar */
+/* Navbar styling */
 .navbar {
-    display: flex; /* Uses flexbox to layout items inside the navbar */
-    justify-content: space-between; /* Distributes space evenly between items */
-    align-items: center; /* Vertically aligns items in the center */
-    padding: 0 20px; /* Adds horizontal padding inside the navbar */
+    background-color: #009259;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-/* Styling for navigation links */
-.nav-link {
-    color: #fff; /* Sets the text color to white */
-    text-decoration: none; /* Removes the default underline from links */
-    padding: 10px 15px; /* Adds padding around the link text */
+/* Logo styling */
+.navbar .logo {
+    margin-right: 1em;
 }
 
-/* Styling for navigation links on hover */
-.nav-link:hover {
-    background-color: #555; /* Changes the background color on hover */
-    border-radius: 5px; /* Rounds the corners of the background */
+/* Links container */
+.navbar .nav-links {
+    display: flex;
+    gap: 1em;
 }
 
-/* Optional: Add styles for the slider if you have one */
+/* General nav link styling */
+.navbar .nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
 
+.navbar .nav-link:hover {
+    text-decoration: none; /* Remove underline on hover */
+}
+
+/* Login button styling */
+.navbar .login-link {
+    background-color: #00b6ff;
+    padding: 1em 5em;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar .login-link:hover {
+    background-color: blue;
+    text-decoration: none; /* Remove underline on hover */
+}
+
+/* Login button styling */
+.navbar .register-link {
+    background-color: #00b6ff;
+    padding: 1em 5em;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar .register-link:hover {
+    background-color: blue;
+    text-decoration: none; /* Remove underline on hover */
+}
+
+
+/* Main content styling */
+main {
+    padding: 2em;
+}
+
+@media (max-width: 1024px) {
+    .navbar .nav-links {
+        display: flex;
+        flex-direction: column; 
+        gap: 1em; 
+    }
+
+    .navbar .login-link {
+        padding: 1em 2em;
+    }
+
+    .navbar .register-link {
+        padding: 1em 2em; 
+    }
+}
