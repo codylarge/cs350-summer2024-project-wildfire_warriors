@@ -20,8 +20,16 @@
             <a href="{% url 'pharmacy' %}" class="nav-link">Pharmacy</a>
         </div>
         <div class="nav-links">
-            <a href="{% url 'login' %}" class="login-link">Login</a>
-            <a href="{% url 'register' %}" class="register-link">Register</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}" class="login-link">Profile</a>
+                <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-link">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="login-link">Login</a>
+                <a href="{% url 'register' %}" class="register-link">Register</a>
+            {% endif %}
         </div>
     </nav>
     <main>

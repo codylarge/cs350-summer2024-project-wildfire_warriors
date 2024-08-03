@@ -11,4 +11,14 @@ def create_user_profile(sender, instance, created, **kwargs):
         if instance.is_patient:
             PatientProfile.objects.create(user=instance)
         elif instance.is_doctor or instance.is_nurse or instance.is_pharmacist:
-            StaffProfile.objects.create(user=instance)
+            # Determine the role
+            role = None
+            if instance.is_doctor:
+                role = 'Doctor'
+            elif instance.is_nurse:
+                role = 'Nurse'
+            elif instance.is_pharmacist:
+                role = 'Pharmacist'
+                
+            # Create the StaffProfile with the determined role
+            StaffProfile.objects.create(user=instance, role=role)

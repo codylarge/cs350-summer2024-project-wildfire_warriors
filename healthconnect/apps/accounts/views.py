@@ -63,7 +63,7 @@ def login_view(request):
 def profile(request):
     user = request.user
     if user.is_authenticated:
-        # Get the user's profile based on their role
+        # Get the users profile based on their role
         if user.is_patient:
             profile = user.patientprofile
             additional_info = {

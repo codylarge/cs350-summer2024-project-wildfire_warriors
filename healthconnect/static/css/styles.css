@@ -61,9 +61,24 @@ body {
     text-decoration: none; 
 }
 
-
 main {
     padding: 2em;
+}
+
+/* Logout button styling */
+.navbar .logout-link {
+    background-color: #ff6666;
+    padding: 1.3em 6em;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    text-decoration: none;
+    cursor: pointer; 
+}
+
+.navbar .logout-link:hover {
+    background-color: #cc0000;
+    text-decoration: none; 
 }
 
 @media (max-width: 1024px) {
