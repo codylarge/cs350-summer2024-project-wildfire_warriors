@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Title{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% block extra_styles %}{% endblock %}
 </head>
 <body>
     <nav class="navbar">
@@ -15,8 +16,8 @@
         <div class="nav-links">
             <a href="{% url 'home' %}" class="nav-link">Home</a>
             <a href="{% url 'about' %}" class="nav-link">About us</a>
-            <a href="{% url 'about' %}" class="nav-link">Services</a>
-            <a href="{% url 'about' %}" class="nav-link">Pharmacy</a>
+            <a href="{% url 'services' %}" class="nav-link">Services</a>
+            <a href="{% url 'pharmacy' %}" class="nav-link">Pharmacy</a>
         </div>
         <div class="nav-links">
             <a href="{% url 'login' %}" class="login-link">Login</a>
