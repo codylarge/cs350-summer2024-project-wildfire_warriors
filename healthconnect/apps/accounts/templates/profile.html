@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+    <div class="profile-container">
+        <h1>Profile Page</h1>
+        <p><strong>Username:</strong> {{ user_info.username }}</p>
+        <p><strong>Email:</strong> {{ user_info.email }}</p>
+
+        {% if user.is_patient %}
+            <h2>Patient Information</h2>
+            <p><strong>Medical History:</strong> {{ user_info.medical_history }}</p>
+        {% else %}
+            <h2>Staff Information</h2>
+            <p><strong>Role:</strong> {{ user_info.role }}</p>
+        {% endif %}
+    </div>
+{% endblock %}
