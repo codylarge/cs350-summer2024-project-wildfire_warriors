@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser, PatientProfile, StaffProfile
+from django.core.exceptions import ValidationError
+
 from django.contrib.auth.models import User
 
 class CustomRegistrationForm(UserCreationForm):
@@ -15,8 +17,24 @@ class CustomRegistrationForm(UserCreationForm):
         model = CustomUser
         fields = ['username', 'email', 'password1', 'password2', 'role']
 
-    def save(self, commit=True):
-        user = super().save(commit=False)
+    # Remove the default help text for username & confirmation password 
+    def __init__(self, *args, **kwargs):
+        super(CustomRegistrationForm, self).__init__(*args, **kwargs)
+        self.fields['password2'].help_text = ''
+        self.fields['username'].help_text = ''
+
+    # Remove password security requirements (only checks for matching passwords)
+    def clean_password2(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        
+        if password1 and password2 and password1 != password2:
+            raise ValidationError("Passwords do not match.")
+        
+        return password2
+
+    def save(self, commit=True): # Called on form submission
+        user = super().save(commit=False) # Create instance of new CustomUser
         role = self.cleaned_data['role']
         
         if role == 'patient':
