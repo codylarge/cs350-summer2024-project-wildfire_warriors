@@ -3,6 +3,8 @@ from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .forms import CustomRegistrationForm
 from .models import CustomUser, PatientProfile, StaffProfile
+from django.contrib.auth.decorators import login_required
+
 
 def register_view(request):
     if request.method == 'POST':
@@ -57,16 +59,30 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
+@login_required
 def profile(request):
     user = request.user
     if user.is_authenticated:
+        # Get the user's profile based on their role
         if user.is_patient:
             profile = user.patientprofile
+            additional_info = {
+                'username': user.username,
+                'email': user.email,
+                'medical_history': profile.medical_history
+            }
         else:
             profile = user.staffprofile
-        return render(request, 'profile.html', {'profile': profile})
+            additional_info = {
+                'username': user.username,
+                'email': user.email,
+                'role': profile.role
+            }
+        
+        return render(request, 'profile.html', {'profile': profile, 'user_info': additional_info})
     else:
         return redirect('login')  # Redirect to login if the user is not authenticated
+
 
 def get_staff_role(user):
     if user.is_doctor:
