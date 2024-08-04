@@ -62,26 +62,29 @@ def login_view(request):
 @login_required
 def profile(request):
     user = request.user
-    if user.is_authenticated:
-        # Get the users profile based on their role
-        if user.is_patient:
-            profile = user.patientprofile
-            additional_info = {
-                'username': user.username,
-                'email': user.email,
-                'medical_history': profile.medical_history
-            }
-        else:
-            profile = user.staffprofile
-            additional_info = {
-                'username': user.username,
-                'email': user.email,
-                'role': profile.role
-            }
-        
-        return render(request, 'profile.html', {'profile': profile, 'user_info': additional_info})
-    else:
-        return redirect('login')  # Redirect to login if the user is not authenticated
+    user_info = {
+        'username': user.username,
+        'email': user.email,
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'birthdate': user.birthdate,
+    }
+
+    if user.is_patient:
+        try:
+            patient_profile = PatientProfile.objects.get(user=user)
+            user_info['medical_history'] = patient_profile.medical_history
+        except PatientProfile.DoesNotExist:
+            user_info['medical_history'] = 'No medical history available.'
+
+    elif user.is_doctor or user.is_nurse or user.is_pharmacist:
+        try:
+            staff_profile = StaffProfile.objects.get(user=user)
+            user_info['role'] = staff_profile.role
+        except StaffProfile.DoesNotExist:
+            user_info['role'] = 'No role available.'
+
+    return render(request, 'profile.html', {'user_info': user_info})
 
 
 def get_staff_role(user):

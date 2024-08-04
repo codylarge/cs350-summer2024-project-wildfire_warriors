@@ -1,0 +1,33 @@
+.top-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items at the top */
+
+}
+
+h1{ 
+    font-weight: bold;
+}
+
+.top-text {
+    padding-top: 5%;
+    flex: 1;
+    margin-right: 2em; /* Add space between text and image */
+}
+
+.surgery-image{
+    width: 40%;
+}
+
+@media (max-width: 1024px) {
+    .main-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .surgery-image {
+        display: none;
+    }
+}

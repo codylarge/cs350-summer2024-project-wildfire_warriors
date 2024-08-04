@@ -6,6 +6,9 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
 class CustomRegistrationForm(UserCreationForm):
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+    birthdate = forms.DateField(required=True, widget=forms.TextInput(attrs={'type': 'date'}))
     email = forms.EmailField(required=True)
     role = forms.ChoiceField(
         choices=[('patient', 'Patient'), ('doctor', 'Doctor'), ('nurse', 'Nurse'), ('pharmacist', 'Pharmacist')],
@@ -15,7 +18,7 @@ class CustomRegistrationForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'password1', 'password2', 'role']
+        fields = ['first_name', 'last_name', 'birthdate', 'username', 'email', 'password1', 'password2', 'role']
 
     # Remove the default help text for username & confirmation password 
     def __init__(self, *args, **kwargs):
@@ -34,7 +37,11 @@ class CustomRegistrationForm(UserCreationForm):
         return password2
 
     def save(self, commit=True): # Called on form submission
-        user = super().save(commit=False) # Create instance of new CustomUser
+        user = super().save(commit=False)
+        user.email = self.cleaned_data['email']
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.birthdate = self.cleaned_data['birthdate']
         role = self.cleaned_data['role']
         
         if role == 'patient':

@@ -1,10 +1,17 @@
 {% extends 'layout.html' %}
-
+{% load static %}
 {% block title %}
 Home
 {% endblock %}
-
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 {% block content %}
-<h1>Home</h1>
-<p>Welcome to HealthConnect</p>
+<div class="top-content">
+    <div class="top-text">
+        <h1>A heritage in care.<br>A reuptation in<br>excellence.</h1>
+        <p>Health Connect provides excellent services by prioritizing the safety and security of patients. Located in Spokane, Washington.</p>
+    </div>
+    <img src="{% static 'images/home1.webp' %}" alt="Doctor" class="surgery-image">
+</div>
 {% endblock %}
