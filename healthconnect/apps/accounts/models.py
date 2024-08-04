@@ -6,6 +6,7 @@ class CustomUser(AbstractUser):
     is_doctor = models.BooleanField(default=False)
     is_nurse = models.BooleanField(default=False)
     is_pharmacist = models.BooleanField(default=False)
+    birthdate = models.DateField(null=True, blank=True)
 
 class PatientProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)

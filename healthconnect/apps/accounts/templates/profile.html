@@ -7,6 +7,8 @@
         <h1>Profile Page</h1>
         <p><strong>Username:</strong> {{ user_info.username }}</p>
         <p><strong>Email:</strong> {{ user_info.email }}</p>
+        <p><strong>Name:</strong> {{ user_info.first_name }} {{ user_info.last_name }}</p>
+        <p><strong>Birthdate:</strong> {{ user_info.birthdate }}</p>
 
         {% if user.is_patient %}
             <h2>Patient Information</h2>
