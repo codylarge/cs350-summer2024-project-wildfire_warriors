@@ -8,9 +8,33 @@ Home
 {% endblock %}
 {% block content %}
 <div class="top-content">
-    <div class="top-text">
-        <h1>A heritage in care.<br>A reputation in<br>excellence.</h1>
-        <p>Health Connect provides excellent services by prioritizing the safety and security of patients. Located in Spokane, Washington.</p>
+    <div class="left-side">
+        <div class="top-text">
+            <h1>A heritage in care.<br>A reputation in<br>excellence.</h1>
+            <p>Health Connect provides excellent services by prioritizing the safety and security of patients. Located in Spokane, Washington.</p>
+        </div>
+        <!-- New Booking Appointment Section -->
+        <div class="booking-section">
+            <h2>Book Appointment</h2>
+            <div class="booking-box">
+                <form action="/book-appointment/" method="post">
+                    <select name="date" required>
+                        <option value="">Date</option>
+                        <!-- Add date options here -->
+                    </select>
+                    <select name="location" required>
+                        <option value="" disabled selected>Location</option>
+                        <option value="service1">Spokane</option>
+                        <!-- Add location options here -->
+                    </select>
+                    <select name="service" required>
+                        <option value="">Service</option>
+                        <!-- Add service options here -->
+                    </select>
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
     </div>
     <img src="{% static 'images/home/home1.webp' %}" alt="Doctor" class="surgery-image">
 </div>
