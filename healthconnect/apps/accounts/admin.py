@@ -11,3 +11,4 @@ class CustomUserAdmin(UserAdmin):
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(PatientProfile)
 admin.site.register(StaffProfile)
+#admin
