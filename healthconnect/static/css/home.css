@@ -2,7 +2,6 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start; /* Align items at the top */
-
 }
 
 h1{ 
@@ -13,11 +12,69 @@ h1{
     padding-top: 5%;
     flex: 1;
     margin-right: 2em; /* Add space between text and image */
+    font-size: large;
 }
 
 .surgery-image {
     width: 40%;
     padding-bottom: 50px;
+}
+/* Styles for the booking section */
+.booking-section {
+    padding-top: 5%;
+    margin-top: 20%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2em;
+}
+
+.booking-section h2 {
+    margin-bottom: 1em; /* Adds space below the heading */
+}
+
+.booking-box {
+    background-color: #009678;
+    padding: 2em;
+    width: 90%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+}
+
+.booking-box select {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: white;
+    padding: 1em 2em;
+    border: none;
+    border-radius: 5px;
+    background: none;
+    flex: 1; 
+    background: transparent;
+    text-align: left;
+}
+
+.booking-box select option {
+    background: #fff;
+    color: #000;
+}
+
+.booking-box button {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    padding: 1em 5em;
+    border: none;
+    border-radius: 5px;
+    background-color: #00b6ff;
+    color: white;
+    cursor: pointer;
+    margin-left: 50px; /* Pushes the button to the right */
+}
+
+.booking-box button:hover {
+    background-color: blue;
 }
 
 /* Footer section styling */
@@ -51,7 +108,7 @@ h1{
     color: white;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1280px) {
     .main-content {
         flex-direction: column;
         text-align: center;
@@ -60,11 +117,24 @@ h1{
     .top-text {
         text-align: center;
     }
+
+    .surgery-image {
+        display: none;
+    }
+
+    .booking-section {
+        align-items: center;
+        text-align: center;
+    }
 }
 
 @media (max-width: 768px) {
-    .surgery-image {
-        display: none;
+
+
+
+
+    .booking-box button {
+        margin-left: 0px; /* Pushes the button to the right */
     }
 
 
