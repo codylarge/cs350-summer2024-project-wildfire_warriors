@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .forms import CustomRegistrationForm
-from .models import CustomUser, PatientProfile, StaffProfile
+from .models import CustomUser, StaffProfile
+from apps.patients.models import PatientProfile
 from django.contrib.auth.decorators import login_required
 
 
@@ -21,23 +22,6 @@ def forgot_password_view(request):
     # Logic for forgot password
     return render(request, 'forgot-password.html')
 
-
-"""
-def register_view(request):
-    if request.method == 'POST':
-        user_form = CustomUserCreationForm(request.POST)
-        if user_form.is_valid():
-            user = user_form.save()
-            if user.is_patient:
-                PatientProfile.objects.create(user=user)
-            else:
-                StaffProfile.objects.create(user=user, role=get_staff_role(user))
-            auth_login(request, user)
-            return redirect('profile')
-    else:
-        user_form = CustomUserCreationForm()
-    return render(request, 'accounts/register.html', {'user_form': user_form})
-"""
 
 def login_view(request):
     if request.method == 'POST':
@@ -70,14 +54,14 @@ def profile(request):
         'birthdate': user.birthdate,
     }
 
-    if user.is_patient:
+    if user.role == 'patient':
         try:
             patient_profile = PatientProfile.objects.get(user=user)
             user_info['medical_history'] = patient_profile.medical_history
         except PatientProfile.DoesNotExist:
             user_info['medical_history'] = 'No medical history available.'
 
-    elif user.is_doctor or user.is_nurse or user.is_pharmacist:
+    else:
         try:
             staff_profile = StaffProfile.objects.get(user=user)
             user_info['role'] = staff_profile.role

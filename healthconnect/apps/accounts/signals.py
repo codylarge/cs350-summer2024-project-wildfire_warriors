@@ -3,22 +3,24 @@
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .models import CustomUser, PatientProfile, StaffProfile
+from .models import CustomUser, StaffProfile
+from apps.patients.models import PatientProfile
+
+
 
 @receiver(post_save, sender=CustomUser)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        if instance.is_patient:
+        role = instance.role
+        if role == 'patient':
             PatientProfile.objects.create(user=instance)
-        elif instance.is_doctor or instance.is_nurse or instance.is_pharmacist:
-            # Determine the role
-            role = None
-            if instance.is_doctor:
-                role = 'Doctor'
-            elif instance.is_nurse:
-                role = 'Nurse'
-            elif instance.is_pharmacist:
-                role = 'Pharmacist'
+        elif role == 'doctor':
+            role = 'Doctor'
+        elif role == 'nurse':
+            role = 'Nurse'
+        elif role == 'pharmacist':
+            role = 'Pharmacist'
+        else:
+            role = 'Unknown'
                 
-            # Create the StaffProfile with the determined role
-            StaffProfile.objects.create(user=instance, role=role)
+        StaffProfile.objects.create(user=instance, role=role)
