@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, PatientProfile, StaffProfile
+from .models import CustomUser, StaffProfile
+from apps.patients.models import PatientProfile 
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser

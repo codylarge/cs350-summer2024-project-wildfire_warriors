@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Cantarell:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    padding-inline: 15%;
+}
+
+.navbar {
+    background-color: #009678;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Alternative navbar styling
+.navbar {
+    background-color: #009678;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+*/
+
+.navbar .logo {
+    margin-right: 1em;
+}
+
+/* Links container */
+.navbar .nav-links {
+    display: flex;
+    gap: 1em;
+}
+
+/* General nav link styling */
+.navbar .nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar .nav-link:hover {
+    text-decoration: none; 
+    color: rgb(174, 0, 255);
+}
+
+/* Login button styling */
+
+.navbar button {
+    font-family: 'Poppins', sans-serif;
+    background-color: #00a7e9;
+    padding: 1.3em 6em;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    text-decoration: none;
+    cursor: pointer; 
+}
+
+.navbar .login-link:hover {
+    background-color: #0040c9;
+    text-decoration: none; 
+}
+
+/* Register button styling */
+.navbar .register-link {
+    background-color: #ff7800;
+}
+
+.navbar .register-link:hover {
+    background-color: #ff2300;
+    text-decoration: none; 
+}
+
+/* Logout button styling */
+.navbar .logout-link {
+    background-color: #ff6666;
+}
+
+.navbar .logout-link:hover {
+    background-color: #cc0000;
+    text-decoration: none; 
+}
+
+@media (max-width: 1024px) {
+    
+    .navbar .nav-links {
+        display: flex;
+        flex-direction: column; 
+        gap: 1em; 
+    }
+
+    .image-section #home-image1 {
+        max-width: 350px; 
+    }
+
+}
+
+
+
+/* Cantarell font styles */
+.cantarell-regular {
+    font-family: "Cantarell", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .cantarell-bold {
+    font-family: "Cantarell", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .cantarell-regular-italic {
+    font-family: "Cantarell", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  .cantarell-bold-italic {
+    font-family: "Cantarell", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+  
