@@ -3,7 +3,7 @@ from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .forms import CustomRegistrationForm
 from .models import CustomUser, StaffProfile
-from apps.patients.models import PatientProfile
+from apps.patients.models import Patient
 from django.contrib.auth.decorators import login_required
 
 
@@ -56,9 +56,9 @@ def profile(request):
 
     if user.role == 'patient':
         try:
-            patient_profile = PatientProfile.objects.get(user=user)
+            patient_profile = Patient.objects.get(user=user)
             user_info['medical_history'] = patient_profile.medical_history
-        except PatientProfile.DoesNotExist:
+        except Patient.DoesNotExist:
             user_info['medical_history'] = 'No medical history available.'
 
     else:

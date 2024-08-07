@@ -4,7 +4,10 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .models import CustomUser, StaffProfile
-from apps.patients.models import PatientProfile
+from apps.patients.models import Patient
+from apps.doctors.models import Doctor
+from apps.nurses.models import Nurse
+from apps.pharmacists.models import Pharmacist
 
 
 
@@ -13,14 +16,15 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         role = instance.role
         if role == 'patient':
-            PatientProfile.objects.create(user=instance)
+            Patient.objects.create(user=instance)
         elif role == 'doctor':
-            role = 'Doctor'
+            Doctor.objects.create(user=instance)
         elif role == 'nurse':
-            role = 'Nurse'
+            Nurse.objects.create(user=instance)
         elif role == 'pharmacist':
             role = 'Pharmacist'
+            Pharmacist.objects.create(user=instance)
         else:
             role = 'Unknown'
                 
-        StaffProfile.objects.create(user=instance, role=role)
+        #StaffProfile.objects.create(user=instance, role=role)
