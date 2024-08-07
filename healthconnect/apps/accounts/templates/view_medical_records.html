@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h2>Medical Records</h2>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Condition</th>
+      <th>Remedy</th>
+      <th>Prescription</th>
+    </tr>
+    {% for record in records %}
+    <tr>
+      <td>{{ record.date }}</td>
+      <td>{{ record.condition }}</td>
+      <td>{{ record.remedy }}</td>
+      <td>{{ record.prescription }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
