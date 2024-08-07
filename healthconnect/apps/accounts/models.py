@@ -11,3 +11,13 @@ class StaffProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class MedicalRecord(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    date = models.DateField()
+    condition = models.CharField(max_length=255)
+    remedy = models.CharField(max_length=255)
+    prescription = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.date} - {self.condition}"
