@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUser, StaffProfile, MedicalRecord
-from apps.patients.models import PatientProfile
+from .models import CustomUser, StaffProfile
+from apps.patients.models import Patient
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 
@@ -72,8 +72,3 @@ class StaffProfileForm(forms.ModelForm):
         model = StaffProfile
         fields = ('role',)
 '''
-
-class MedicalRecordForm(forms.ModelForm):
-    class Meta:
-        model = MedicalRecord
-        fields = ['date', 'condition', 'remedy', 'prescription']
