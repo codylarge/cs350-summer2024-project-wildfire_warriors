@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Patient Services
+{% endblock %}
+
+{% block content %}
+<h1>Services</h1>
+<p>Our hospital offers a range of services designed to provide comprehensive and efficient care for our patients. The key services we provide include:</p>
+<ul>
+    <li>
+        <h3>Scheduling Appointments</h3>
+        <p>Easily book appointments with our medical professionals through our user-friendly scheduling system.</p>
+        <button onclick="location.href='{% url 'book_appointment' %}'">Book an Appointment</button>
+    </li>
+    <li>
+        <h3>View Medical Records</h3>
+        <p>Access your medical records securely and conveniently online, ensuring you have all your health information at your fingertips.</p>
+        <button onclick="location.href='{% url 'medical_record' %}'">View Medical Records</button>
+    </li>
+</ul>
+{% endblock %}
