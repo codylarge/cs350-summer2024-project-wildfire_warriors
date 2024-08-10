@@ -3,13 +3,6 @@ from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser, StaffProfile
 from apps.patients.models import Patient 
 
-class CustomUserAdmin(UserAdmin):
-    model = CustomUser
-    fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('is_patient', 'is_doctor', 'is_nurse', 'is_pharmacist')}),
-    )
-
-admin.site.register(CustomUser, CustomUserAdmin)
-admin.site.register(Patient)
+admin.site.register(CustomUser)
 admin.site.register(StaffProfile)
 #admin

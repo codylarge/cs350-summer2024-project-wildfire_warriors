@@ -3,8 +3,9 @@
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
 from .models import CustomUser, StaffProfile
-from apps.patients.models import Patient
+from apps.patients.models import Patient, MedicalRecord
 from apps.doctors.models import Doctor
 from apps.nurses.models import Nurse
 from apps.pharmacists.models import Pharmacist
@@ -12,11 +13,12 @@ from apps.pharmacists.models import Pharmacist
 
 
 @receiver(post_save, sender=CustomUser)
-def create_user_profile(sender, instance, created, **kwargs):
+def create_user(sender, instance, created, **kwargs):
     if created:
         role = instance.role
         if role == 'patient':
             Patient.objects.create(user=instance)
+            MedicalRecord.objects.create(user=instance, date=timezone.now()) 
         elif role == 'doctor':
             Doctor.objects.create(user=instance)
         elif role == 'nurse':

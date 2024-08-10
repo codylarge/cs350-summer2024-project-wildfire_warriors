@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser, StaffProfile
 from apps.patients.models import Patient
@@ -55,9 +56,11 @@ class CustomRegistrationForm(UserCreationForm):
             user.is_staff = True
         else:
             raise ValidationError("Invalid role.")
-    
+        
         if commit:
             user.save()
+            # Authenticate and log the user in
+            user = authenticate(username=user.username, password=self.cleaned_data['password1'])
         
         return user
 
