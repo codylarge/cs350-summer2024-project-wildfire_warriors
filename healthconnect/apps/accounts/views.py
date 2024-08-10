@@ -70,7 +70,6 @@ def profile(request):
 
     return render(request, 'profile.html', {'user_info': user_info})
 
-
 def get_staff_role(user):
     if user.is_doctor:
         return 'Doctor'

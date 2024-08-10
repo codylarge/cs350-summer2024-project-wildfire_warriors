@@ -11,6 +11,7 @@ urlpatterns = [
     path('services/', views.services, name='services'),
     path('pharmacy/', views.pharmacy, name='pharmacy'),
     path('accounts/', include('apps.accounts.urls')),
+    path('patients/', include('apps.patients.urls')),
     path('profile/', views.profile, name='profile'),
 
 ]
