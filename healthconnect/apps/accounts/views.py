@@ -88,7 +88,15 @@ def about(request):
     return render(request, 'about.html')
 
 def services(request):
-    return render(request, 'services.html')
+    user = request.user
+    if hasattr(user, 'doctor'):
+        return render(request, 'doctor_services.html')
+    elif hasattr(user, 'nurse'):
+        return render(request, 'nurse_services.html')
+    elif hasattr(user, 'pharmacist'):
+        return render(request, 'pharmacist_services.html')
+    else:
+        return render(request, 'patient_services.html')
 
 def pharmacy(request):
     return render(request, 'pharmacy.html')

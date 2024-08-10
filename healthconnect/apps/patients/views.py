@@ -53,3 +53,7 @@ def select_doctor(request):
     
     return render(request, 'select_doctor.html', {'doctors': doctors})
 
+# NOT login required, this will be allowed by all and a request to login will be made when user selects a service
+def patient_services(request):
+    return render(request, 'patient_services.html')
+
