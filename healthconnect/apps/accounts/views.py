@@ -11,11 +11,13 @@ def register_view(request):
     if request.method == 'POST':
         form = CustomRegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('login')
+            user = form.save()  # Save the user using the form's save method
+
+            auth_login(request, user)
+            return redirect('select_doctor')  
     else:
         form = CustomRegistrationForm()
-
+    
     return render(request, 'register.html', {'form': form})
 
 def forgot_password_view(request):
