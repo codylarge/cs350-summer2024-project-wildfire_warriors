@@ -8,4 +8,7 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('profile/', views.profile, name='profile'),
+    path('medical-records/', views.view_medical_records, name='view_medical_records'),
+    path('medical-records/modify/<int:record_id>/', views.modify_medical_record, name='modify_medical_record'),
+    path('medical-records/modify/', views.modify_medical_record, name='add_medical_record'),
 ]
