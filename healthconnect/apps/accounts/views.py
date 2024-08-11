@@ -12,9 +12,15 @@ def register_view(request):
         form = CustomRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()  # Save the user using the form's save method
+            role = form.cleaned_data['role']
 
             auth_login(request, user)
-            return redirect('select_doctor')  
+            
+            # Redirect based on user role
+            if role == 'patient':
+                return redirect('select_doctor')
+            else:
+                return redirect('home')
     else:
         form = CustomRegistrationForm()
     
@@ -91,6 +97,8 @@ def services(request):
     user = request.user
     if hasattr(user, 'doctor'):
         return render(request, 'doctor_services.html')
+    elif hasattr(user, 'patient'):
+        return render(request, 'patient_services.html')
     elif hasattr(user, 'nurse'):
         return render(request, 'nurse_services.html')
     elif hasattr(user, 'pharmacist'):
@@ -99,4 +107,6 @@ def services(request):
         return render(request, 'patient_services.html')
 
 def pharmacy(request):
+    custom_user = CustomUser.objects.get(username=request.user.username)
+    print(f"User: {custom_user}")
     return render(request, 'pharmacy.html')

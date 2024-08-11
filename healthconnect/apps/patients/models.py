@@ -6,19 +6,26 @@ from django.utils import timezone
 # Create your models here.
 class Patient(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
-    medical_history = models.TextField(blank=True)
+    medical_history = models.ManyToManyField('MedicalRecord', blank=True, related_name='patients')
     primary_doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True, related_name='patients')
 
-
+    @property
+    def full_name(self):
+        return self.user.get_full_name()
+    
+    @property
+    def username(self):
+        return self.user.username
+    
     def __str__(self):
         return self.user.username
     
 class MedicalRecord(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    date = models.DateField(default=timezone.now)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='medical_records')
     condition = models.CharField(max_length=255)
-    remedy = models.CharField(max_length=255)
-    prescription = models.CharField(max_length=255)
+    date = models.DateField()
+    prescription = models.TextField()
+    remedy = models.TextField()
 
     def __str__(self):
-        return f"{self.user.username} - {self.date} - {self.condition}"
+        return f"{self.condition} on {self.date}"

@@ -17,16 +17,13 @@ def create_user(sender, instance, created, **kwargs):
     if created:
         role = instance.role
         if role == 'patient':
-            Patient.objects.create(user=instance)
-            MedicalRecord.objects.create(user=instance, date=timezone.now()) 
+            patient = Patient.objects.create(user=instance)
+            MedicalRecord.objects.create(patient=patient, date=timezone.now()) 
         elif role == 'doctor':
             Doctor.objects.create(user=instance)
         elif role == 'nurse':
             Nurse.objects.create(user=instance)
         elif role == 'pharmacist':
-            role = 'Pharmacist'
             Pharmacist.objects.create(user=instance)
-        else:
-            role = 'Unknown'
                 
         #StaffProfile.objects.create(user=instance, role=role)
