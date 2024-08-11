@@ -1,22 +1,45 @@
 {% extends 'layout.html' %}
 
+{% load static %}
 {% block title %}
 Patient Services
 {% endblock %}
 
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'css/patient-services.css' %}">
+{% endblock %}
+
 {% block content %}
-<h1>Services</h1>
-<p>Our hospital offers a range of services designed to provide comprehensive and efficient care for our patients. The key services we provide include:</p>
-<ul>
-    <li>
-        <h3>Scheduling Appointments</h3>
-        <p>Easily book appointments with our medical professionals through our user-friendly scheduling system.</p>
-        <button onclick="location.href='{% url 'book_appointment' %}'">Book an Appointment</button>
-    </li>
-    <li>
-        <h3>View Medical Records</h3>
-        <p>Access your medical records securely and conveniently online, ensuring you have all your health information at your fingertips.</p>
-        <button onclick="location.href='{% url 'medical_history' %}'">View Medical History</button>
-    </li>
-</ul>
+<div class="services-container">
+    <div class="services-box">
+        <h1>Services</h1>
+        <p>Our hospital offers a range of services designed to provide comprehensive and efficient care for our patients. The key services we provide include:</p>
+        <ul class="services-list">
+            <li class="service-item">
+                <img src="{% static 'images/calendar_icon.webp' %}" alt="Appointment Icon" class="service-icon">
+                <div>
+                    <h3>Scheduling Appointments</h3>
+                    <p>Easily book appointments with our medical professionals through our user-friendly scheduling system.</p>
+                    <button onclick="location.href='{% url 'book_appointment' %}'">Book an Appointment</button>
+                </div>
+            </li>
+            <li class="service-item">
+                <img src="{% static 'images/medical_record_icon.webp' %}" alt="Medical Records Icon" class="service-icon">
+                <div>
+                    <h3>View Medical Records</h3>
+                    <p>Access your medical records securely and conveniently online, ensuring you have all your health information at your fingertips.</p>
+                    <button onclick="location.href='{% url 'medical_history' %}'">View Medical History</button>
+                </div>
+            </li>
+            <li class="service-item">
+                <img src="{% static 'images/pharmacy_icon.webp' %}" alt="Pharmacy Icon" class="service-icon">
+                <div>
+                    <h3>Pharmacy</h3>
+                    <p>Access free drugs.</p>
+                    <button onclick="location.href='{% url 'medical_history' %}'">View Medical History</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
 {% endblock %}
