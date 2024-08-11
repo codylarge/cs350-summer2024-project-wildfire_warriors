@@ -1,0 +1,79 @@
+/* Default styles */
+.services-container {
+    padding: 20px;
+}
+
+.services-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.services-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.service-item {
+    border: 1px solid rgb(163, 163, 163);
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    border-radius: 5px;
+}
+
+.service-icon {
+    margin-right: 10px;
+    width: 125px;
+    padding: 15px;
+    padding-right: 40px;
+    align-self: flex-start; /* Ensure the icon aligns to the top */
+}
+
+.service-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 0; /* Reset any default margin */
+}
+
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #aaaaaa; 
+    color: white; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker background on hover */
+}
+
+/* Styles for tablets and smaller screens */
+@media (max-width: 768px) {
+    .service-item {
+        flex-direction: column; /* Stack icon and text vertically */
+        align-items: center; /* Center items horizontally */
+        padding: 10px;
+        text-align: center; /* Center all text and child elements */
+    }
+
+    .service-icon {
+        width: 100px; /* Reduce icon size */
+        padding: 10px;
+        margin-bottom: 10px; /* Add space between icon and text */
+        align-self: center;
+    }
+
+    .service-text {
+        margin: 0; /* Reset margin if needed */
+    }
+    
+    h1, 
+    p {
+        text-align: center;
+    }
+}
