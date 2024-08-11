@@ -1,22 +1,32 @@
 {% extends 'layout.html' %}
 
+{% load static %}
 {% block title %}
 Doctor Services
+{% endblock %}
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'css/services.css' %}"> 
 {% endblock %}
 
 {% block content %}
 <h1>Doctor Services</h1>
 <p>Our hospital offers a range of services designed to provide comprehensive and efficient care for our patients. The key services we provide include:</p>
-<ul>
-    <li>
-        <h3>Manage Upcoming Appointments</h3>
-        <p>Easily book appointments with our medical professionals through our user-friendly scheduling system.</p>
-        <button onclick="location.href='{% url 'book_appointment' %}'">Manage Appointment</button>
+<ul class="services-list">
+    <li class="service-item">
+        <img src="{% static 'images/calendar_icon.webp' %}" alt="Appointment Icon" class="service-icon">
+        <div>
+            <h3>Manage Upcoming Appointments</h3>
+            <p>Easily book appointments with our medical professionals through our user-friendly scheduling system.</p>
+            <button onclick="location.href='{% url 'book_appointment' %}'">Manage Appointment</button>
+        </div>
     </li>
-    <li>
-        <h3>Update Patient Records</h3>
-        <p>Access your medical records securely and conveniently online, ensuring you have all your health information at your fingertips.</p>
-        <button onclick="location.href='{% url 'list_patients' %}'">Update Records</button>
+    <li class="service-item">
+        <img src="{% static 'images/medical_record_icon.webp' %}" alt="Medical Records Icon" class="service-icon">
+        <div>
+            <h3>Update Patient Records</h3>
+            <p>Access your medical records securely and conveniently online, ensuring you have all your health information at your fingertips.</p>
+            <button onclick="location.href='{% url 'list_patients' %}'">Update Records</button>
+        </div>
     </li>
 </ul>
 {% endblock %}
