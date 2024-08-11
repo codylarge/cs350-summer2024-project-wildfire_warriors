@@ -4,36 +4,30 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import MedicalRecord   
 from apps.doctors.models import Doctor
 from .models import Patient
-from .forms import MedicalRecordForm
+from apps.accounts.models import CustomUser
 
+
+# NOT @login required, this will be allowed by all and a request to login will be made when user selects a service
+def patient_services(request):
+    custom_user = get_object_or_404(CustomUser, username=request.user.username)
+    patient = get_object_or_404(Patient, user=custom_user)
+    print("testing patient_services")
+    print(f"Patient Username: {patient.user.username}")
+    
+    return render(request, 'select_doctor.html', {'patient': patient})
+    
 # Create your views here.
 @login_required
 def book_appointment(request):
     return render(request, 'book-appointment.html')
 
 @login_required
-def medical_record(request):
-    return render(request, 'medical-record.html')
-
-@login_required
-def modify_medical_record(request, record_id=None):
-    if not request.user.is_doctor and not request.user.is_nurse:
-        return redirect('home')
-
-    if record_id:
-        record = get_object_or_404(MedicalRecord, id=record_id)
-    else:
-        record = MedicalRecord(user=request.user)
-
-    if request.method == 'POST':
-        form = MedicalRecordForm(request.POST, instance=record)
-        if form.is_valid():
-            form.save()
-            return redirect('view_medical_records')
-    else:
-        form = MedicalRecordForm(instance=record)
-
-    return render(request, 'modify_medical_record.html', {'form': form})
+def medical_history(request):
+    current_user = request.user
+    patient = get_object_or_404(Patient, user=current_user)
+    records = MedicalRecord.objects.filter(patient=patient)
+    print(f"Patient Username: {patient.user.username}")
+    return render(request, 'medical-history.html', {'records': records})
 
 @login_required
 def select_doctor(request):
@@ -52,8 +46,4 @@ def select_doctor(request):
         return redirect('profile')
     
     return render(request, 'select_doctor.html', {'doctors': doctors})
-
-# NOT login required, this will be allowed by all and a request to login will be made when user selects a service
-def patient_services(request):
-    return render(request, 'patient_services.html')
 

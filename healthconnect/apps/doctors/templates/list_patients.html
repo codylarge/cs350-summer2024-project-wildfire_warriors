@@ -1,0 +1,5 @@
+{% for patient in patients %}
+    <p>Patient Username: {{ patient.username }}</p>
+    <p>Patient Name: {{ patient.full_name }}</p>
+    <a href="{% url 'update_medical_record' patient.username %}">Update Records for {{ patient.full_name }}</a>
+{% endfor %}
