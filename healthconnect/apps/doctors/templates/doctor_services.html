@@ -28,5 +28,15 @@ Doctor Services
             <button onclick="location.href='{% url 'list_patients' %}'">Update Records</button>
         </div>
     </li>
+    <li class="service-item">
+        <img src="{% static 'images/pills_icon.webp' %}" alt="Pills Icon" class="service-icon">
+        <div>
+            <h3>Request Perscription</h3>
+            <p>Request Drugs for patient</p>
+            <button onclick="location.href='{% url 'list_patients_prescription' %}'">
+              Request
+            </button>
+        </div>
+      </li>
 </ul>
 {% endblock %}
