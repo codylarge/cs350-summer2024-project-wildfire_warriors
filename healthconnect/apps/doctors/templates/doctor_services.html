@@ -1,22 +1,37 @@
-{% extends 'layout.html' %}
-
-{% block title %}
-Doctor Services
-{% endblock %}
-
+{% extends 'layout.html' %} {% block title %} Doctor Services {% endblock %} \
 {% block content %}
 <h1>Doctor Services</h1>
-<p>Our hospital offers a range of services designed to provide comprehensive and efficient care for our patients. The key services we provide include:</p>
+<p>
+  Our hospital offers a range of services designed to provide comprehensive and
+  efficient care for our patients. The key services we provide include:
+</p>
 <ul>
-    <li>
-        <h3>Manage Upcoming Appointments</h3>
-        <p>Easily book appointments with our medical professionals through our user-friendly scheduling system.</p>
-        <button onclick="location.href='{% url 'book_appointment' %}'">Manage Appointment</button>
-    </li>
-    <li>
-        <h3>Update Patient Records</h3>
-        <p>Access your medical records securely and conveniently online, ensuring you have all your health information at your fingertips.</p>
-        <button onclick="location.href='{% url 'list_patients' %}'">Update Records</button>
-    </li>
+  <li>
+    <h3>Manage Upcoming Appointments</h3>
+    <p>
+      Easily book appointments with our medical professionals through our
+      user-friendly scheduling system.
+    </p>
+    <button onclick="location.href='{% url 'book_appointment' %}'">
+      Manage Appointment
+    </button>
+  </li>
+  <li>
+    <h3>Update Patient Records</h3>
+    <p>
+      Access your medical records securely and conveniently online, ensuring you
+      have all your health information at your fingertips.
+    </p>
+    <button onclick="location.href='{% url 'list_patients' %}'">
+      Update Records
+    </button>
+  </li>
+  <li>
+    <h3>Request Perscription</h3>
+    <p>Request Drugs for patient</p>
+    <button onclick="location.href='{% url 'list_patients_prescription' %}'">
+      Request
+    </button>
+  </li>
 </ul>
 {% endblock %}

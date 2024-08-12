@@ -6,29 +6,32 @@
 
 <!-- Display existing medical records -->
 {% if medical_records %}
-    <ul>
-        {% for record in medical_records %}
-            <li>{{ record.condition }} on {{ record.date }}: {{ record.prescription }} - {{ record.remedy }}</li>
-        {% endfor %}
-    </ul>
+<ul>
+  {% for record in medical_records %}
+  <li>
+    {{ record.condition }} on {{ record.date }}: {{ record.prescription }} - {{
+    record.remedy }}
+  </li>
+  {% endfor %}
+</ul>
 {% else %}
-    <p>No medical records found.</p>
+<p>No medical records found.</p>
 {% endif %}
 
 <!-- Form to add a new medical record -->
 <form method="post" action="">
-    {% csrf_token %}
-    <label for="condition">Condition:</label>
-    <input type="text" id="condition" name="condition" required><br>
+  {% csrf_token %}
+  <label for="condition">Condition:</label>
+  <input type="text" id="condition" name="condition" required /><br />
 
-    <label for="date">Date:</label>
-    <input type="date" id="date" name="date" required><br>
+  <label for="date">Date:</label>
+  <input type="date" id="date" name="date" required /><br />
 
-    <label for="prescription">Prescription:</label>
-    <textarea id="prescription" name="prescription"></textarea><br>
+  <label for="prescription">Prescription:</label>
+  <textarea id="prescription" name="prescription"></textarea><br />
 
-    <label for="remedy">Remedy:</label>
-    <textarea id="remedy" name="remedy"></textarea><br>
+  <label for="remedy">Remedy:</label>
+  <textarea id="remedy" name="remedy"></textarea><br />
 
-    <input type="submit" value="Add Record">
+  <input type="submit" value="Add Record" />
 </form>

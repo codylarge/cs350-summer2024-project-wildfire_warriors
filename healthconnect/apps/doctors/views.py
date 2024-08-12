@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import CustomUser
 from apps.patients.models import MedicalRecord
 from apps.patients.models import Patient
+from .forms import PrescriptionForm
 
 # Create your views here.
 def doctor_services(request):
@@ -16,6 +17,39 @@ def list_patients(request):
     for patient in patients:
         print(f"Patient: {patient}, Username: {patient.username}")
     return render(request, 'list_patients.html', {'patients': patients})
+
+@login_required
+def list_patients_prescription(request):
+    doctor = request.user.doctor
+    patients = Patient.objects.filter(primary_doctor=doctor)
+    for patient in patients:
+        print(f"Patient: {patient}, Username: {patient.username}")
+    return render(request, 'list_patients_prescription.html', {'patients': patients})
+
+@login_required
+def request_prescription(request, patient_username):
+    patient = get_object_or_404(Patient, user__username=patient_username)
+    if request.method == 'POST':
+        form = PrescriptionForm(request.POST)
+        if form.is_valid():
+            prescription = form.save(commit=False)
+            try:
+                prescription.doctor = patient.primary_doctor
+                prescription.patient = patient  # Ensure the patient field is set
+                prescription.save()
+            except Patient.DoesNotExist:
+                print("Patient does not exist")
+                pass
+            prescription.save()
+            return redirect('list_patients_prescription')
+    else:
+        form = PrescriptionForm()
+
+    return render(request, 'request_prescription.html', {
+        'patient': patient,
+        'form': form,
+    })
+
 
 @login_required
 def update_medical_record(request, username):
