@@ -1,34 +1,40 @@
-<!-- update_records.html -->
-<h1>Update Records for {{ patient.full_name }}</h1>
+{% extends "layout.html" %}
 
-<p>Patient Username: {{ patient.username }}</p>
-<p>Patient Name: {{ patient.full_name }}</p>
+{% block content %}
+    <!-- update_records.html -->
+    <h1>Update Records for {{ patient.full_name }}</h1>
 
-<!-- Display existing medical records -->
-{% if medical_records %}
-    <ul>
-        {% for record in medical_records %}
-            <li>{{ record.condition }} on {{ record.date }}: {{ record.prescription }} - {{ record.remedy }}</li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No medical records found.</p>
-{% endif %}
+    <p>Patient Username: {{ patient.username }}</p>
+    <p>Patient Name: {{ patient.full_name }}</p>
 
-<!-- Form to add a new medical record -->
-<form method="post" action="">
-    {% csrf_token %}
-    <label for="condition">Condition:</label>
-    <input type="text" id="condition" name="condition" required><br>
+    <!-- Display existing medical records -->
+    {% if medical_records %}
+        <ul>
+            {% for record in medical_records %}
+                <li>{{ record.condition }} on {{ record.date }}: {{ record.prescription }} - {{ record.remedy }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No medical records found.</p>
+    {% endif %}
 
-    <label for="date">Date:</label>
-    <input type="date" id="date" name="date" required><br>
+    <!-- Form to add a new medical record -->
+    <form method="post" action="">
+        {% csrf_token %}
+        <label for="condition">Condition:</label>
+        <input type="text" id="condition" name="condition" required><br>
 
-    <label for="prescription">Prescription:</label>
-    <textarea id="prescription" name="prescription"></textarea><br>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required><br>
 
-    <label for="remedy">Remedy:</label>
-    <textarea id="remedy" name="remedy"></textarea><br>
+        <label for="prescription">Prescription:</label>
+        <textarea id="prescription" name="prescription"></textarea><br>
 
-    <input type="submit" value="Add Record">
-</form>
+        <label for="remedy">Remedy:</label>
+        <textarea id="remedy" name="remedy"></textarea><br>
+
+        <input type="submit" value="Add Record">
+    </form>
+
+    <a href="{% url 'list_patients' %}" class="button">Back</a>
+{% endblock %}
