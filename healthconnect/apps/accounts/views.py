@@ -107,6 +107,6 @@ def services(request):
         return render(request, 'patient_services.html')
 
 def pharmacy(request):
-    custom_user = CustomUser.objects.get(username=request.user.username)
-    print(f"User: {custom_user}")
+    #custom_user = CustomUser.objects.get(username=request.user.username)
+    #print(f"User: {custom_user}")
     return render(request, 'pharmacy.html')
