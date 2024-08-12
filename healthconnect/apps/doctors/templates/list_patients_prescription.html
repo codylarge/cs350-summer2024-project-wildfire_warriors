@@ -1,0 +1,11 @@
+<h1>Your Patients</h1>
+<ul>
+  {% for patient in patients %}
+  <li>
+    {{ patient.full_name }} -
+    <a href="{% url 'request_prescription' patient.user.username %}"
+      >Request Prescription</a
+    >
+  </li>
+  {% endfor %}
+</ul>

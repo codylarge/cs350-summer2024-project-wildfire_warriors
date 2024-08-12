@@ -8,7 +8,8 @@ class Patient(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     medical_history = models.ManyToManyField('MedicalRecord', blank=True, related_name='patients')
     primary_doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True, related_name='patients')
-
+    prescriptions = models.ManyToManyField('pharmacists.Prescription', blank=True, related_name='patients')
+    
     @property
     def full_name(self):
         return self.user.get_full_name()
