@@ -10,9 +10,24 @@
         <p><strong>Name:</strong> {{ user_info.first_name }} {{ user_info.last_name }}</p>
         <p><strong>Birthdate:</strong> {{ user_info.birthdate }}</p>
 
-        {% if user.is_patient %}
+        {% if user_info.role == 'patient' %}
             <h2>Patient Information</h2>
-            <p><strong>Medical History:</strong> {{ user_info.medical_history }}</p>
+            <p><strong>Primary Doctor:</strong> {{ user_info.primary_doctor.full_name }}</p>
+            <h3>Medical History:</h3>
+            {% if user_info.medical_history %}
+                <ul>
+                    {% for record in user_info.medical_history %}
+                        <li>
+                            <strong>Condition:</strong> {{ record.condition }}<br>
+                            <strong>Date:</strong> {{ record.date }}<br>
+                            <strong>Prescription:</strong> {{ record.prescription }}<br>
+                            <strong>Remedy:</strong> {{ record.remedy }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No medical history available.</p>
+            {% endif %}
         {% else %}
             <h2>Staff Information</h2>
             <p><strong>Role:</strong> {{ user_info.role }}</p>

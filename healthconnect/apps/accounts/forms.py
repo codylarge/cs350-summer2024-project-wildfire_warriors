@@ -48,11 +48,11 @@ class CustomRegistrationForm(UserCreationForm):
         user.is_active = True  # Default field from the AbstractUser class
         user.date_joined = timezone.now()  # Default field from the AbstractUser class
 
-        role = self.cleaned_data['role']
+        user.role = self.cleaned_data['role']
         
-        if role == 'patient':
+        if user.role == 'patient':
             user.is_staff = False # Default field from the AbstractUser class
-        elif role in ['doctor', 'nurse', 'pharmacist']:
+        elif user.role in ['doctor', 'nurse', 'pharmacist']:
             user.is_staff = True
         else:
             raise ValidationError("Invalid role.")

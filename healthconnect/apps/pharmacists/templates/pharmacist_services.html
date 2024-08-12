@@ -5,18 +5,23 @@ Pharmacist Services
 {% endblock %}
 
 {% block content %}
-<h1>Services</h1>
+<h1>Pharmacist Services</h1>
 <p>Our hospital offers a range of services designed to provide comprehensive and efficient care for our patients. The key services we provide include:</p>
 <ul>
     <li>
-        <h3>Scheduling Appointments</h3>
+        <h3>Manage Upcoming Appointments</h3>
         <p>Easily book appointments with our medical professionals through our user-friendly scheduling system.</p>
-        <button onclick="location.href='{% url 'book_appointment' %}'">Book an Appointment</button>
+        <button onclick="location.href='{% url 'book_appointment' %}'">Manage Appointment</button>
     </li>
     <li>
-        <h3>View Medical Records</h3>
+        <h3>Update Patient Records</h3>
         <p>Access your medical records securely and conveniently online, ensuring you have all your health information at your fingertips.</p>
-        <button onclick="location.href='{% url 'medical_record' %}'">View Medical Records</button>
+        <button onclick="location.href='{% url 'list_patients' %}'">Update Records</button>
+    </li>
+    <li>
+        <h3>Pharmacy</h3>
+        <p>View and manage patient prescriptions.</p>
+        <button onclick="location.href='{% url 'pharmacy' %}'">Go to Pharmacy</button>
     </li>
 </ul>
 {% endblock %}

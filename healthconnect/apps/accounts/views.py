@@ -60,14 +60,17 @@ def profile(request):
         'first_name': user.first_name,
         'last_name': user.last_name,
         'birthdate': user.birthdate,
+        'role': user.role,
     }
 
     if user.role == 'patient':
         try:
             patient_profile = Patient.objects.get(user=user)
-            user_info['medical_history'] = patient_profile.medical_history
+            user_info['medical_history'] = patient_profile.medical_records.all()
+            user_info['primary_doctor'] = patient_profile.primary_doctor
         except Patient.DoesNotExist:
             user_info['medical_history'] = 'No medical history available.'
+            user_info['primary_doctor'] = 'No primary doctor assigned.'
 
     else:
         try:

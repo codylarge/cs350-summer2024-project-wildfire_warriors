@@ -6,4 +6,59 @@ Pharmacy
 
 {% block content %}
 <h1>Pharmacy</h1>
+
+{% if user.is_pharmacist %}
+    <table>
+        <tr>
+            <th>Patient Name</th>
+            <th>Prescription</th>
+            <th>Issued</th>
+            <th>Date Issued</th>
+        </tr>
+        {% for patient in patients %}
+        <tr>
+            <td>{{ patient.full_name }}</td>
+            <td>{{ patient.prescription }}</td>
+            <td>
+                <input type="checkbox" class="issued-checkbox" data-patient-id="{{ patient.id }}" {% if patient.issued %}checked{% endif %}>
+            </td>
+            <td>
+                <input type="date" class="date-issued" data-patient-id="{{ patient.id }}" value="{{ patient.date_issued|date:'Y-m-d' }}">
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>You do not have permission to view this page.</p>
+{% endif %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.issued-checkbox').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            const patientId = this.getAttribute('data-patient-id');
+            const dateIssuedInput = document.querySelector(`.date-issued[data-patient-id="${patientId}"]`);
+            if (this.checked) {
+                const today = new Date().toISOString().split('T')[0];
+                dateIssuedInput.value = today;
+            } else {
+                dateIssuedInput.value = '';
+            }
+            // Make an AJAX call to update the prescription status and date issued in the backend
+            // Example:
+            // fetch(`/update_prescription/${patientId}/`, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //         'X-CSRFToken': '{{ csrf_token }}'
+            //     },
+            //     body: JSON.stringify({
+            //         issued: this.checked,
+            //         date_issued: dateIssuedInput.value
+            //     })
+            // });
+        });
+    });
+});
+</script>
 {% endblock %}
