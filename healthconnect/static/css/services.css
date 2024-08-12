@@ -1,4 +1,5 @@
 /* Default styles */
+
 .services-container {
     padding: 20px;
 }
@@ -31,15 +32,9 @@
     align-self: flex-start; /* Ensure the icon aligns to the top */
 }
 
-.service-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin-top: 0; /* Reset any default margin */
-}
-
 
 button {
+    font-family: 'Poppins', sans-serif;
     padding: 10px 20px;
     border: none;
     background-color: #aaaaaa; 
@@ -66,10 +61,6 @@ button:hover {
         padding: 10px;
         margin-bottom: 10px; /* Add space between icon and text */
         align-self: center;
-    }
-
-    .service-text {
-        margin: 0; /* Reset margin if needed */
     }
     
     h1, 
