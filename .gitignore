@@ -1,0 +1,8 @@
+
+healthconnect/db.sqlite3
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.python-version
+.env
