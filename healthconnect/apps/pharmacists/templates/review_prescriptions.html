@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Review Prescription Requests
+{% endblock %}
+
+{% block content %}
+<h1>Prescription Requests</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Patient</th>
+            <th>Drug</th>
+            <th>Amount</th>
+            <th>Date Prescribed</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prescription in prescriptions %}
+        <tr>
+            <td>{{ prescription.patient.full_name }}</td>
+            <td>{{ prescription.drug.name }}</td>
+            <td>{{ prescription.amount }}</td>
+            <td>{{ prescription.date_prescribed }}</td>
+            <td>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="prescription_id" value="{{ prescription.id }}">
+                    <button type="submit">Approve</button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No unapproved prescriptions found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
