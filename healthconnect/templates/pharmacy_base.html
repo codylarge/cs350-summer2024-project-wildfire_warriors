@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block content %}
+<h1>{{ title }}</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Patient</th>
+            <th>Medication</th>
+            <th>Amount</th>
+            <th>Date Prescribed</th>
+            <th>Filled</th>
+            <th>Last Filled</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prescription in prescriptions %}
+        <tr>
+            <td>{{ prescription.patient.full_name }}</td>
+            <td>{{ prescription.drug.name }}</td>
+            <td>{{ prescription.amount }}</td>
+            <td>{{ prescription.date_prescribed }}</td>
+            <td>
+                <input type="checkbox" disabled {% if prescription.filled %}checked{% endif %}>
+            </td>
+            <td>{{ prescription.last_filled }}</td>
+            <td>
+                {% if prescription.filled %}
+                <form method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="prescription_id" value="{{ prescription.id }}">
+                    <button type="submit" name="request_refill">Request Refill</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
