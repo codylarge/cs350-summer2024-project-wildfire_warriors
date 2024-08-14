@@ -11,3 +11,13 @@ class StaffProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Appointment(models.Model):
+    patient = models.ForeignKey('patients.Patient', on_delete=models.CASCADE, related_name='appointments')
+    doctor = models.ForeignKey('doctors.Doctor', on_delete=models.CASCADE, related_name='appointments')
+    date = models.DateTimeField()
+    reason = models.TextField()
+    notes = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.patient} - {self.doctor} on {self.date}"

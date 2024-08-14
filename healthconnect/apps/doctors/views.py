@@ -1,9 +1,11 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
-from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
+from django.shortcuts import redirect, render, get_object_or_404
 from .models import CustomUser
 from apps.patients.models import MedicalRecord
+from datetime import datetime
 from apps.patients.models import Patient
+from apps.accounts.models import Appointment
 from .forms import PrescriptionForm
 
 # Create your views here.
@@ -25,6 +27,20 @@ def list_patients_prescription(request):
     for patient in patients:
         print(f"Patient: {patient}, Username: {patient.username}")
     return render(request, 'list_patients_prescription.html', {'patients': patients})
+
+@login_required
+def manage_appointments(request):
+    doctor = request.user.doctor  # Assumes user has a related Doctor profile
+    appointments = Appointment.objects.filter(doctor=doctor, date__gte=datetime.now()).order_by('date')
+
+    if request.method == 'POST':
+        appointment_id = request.POST.get('appointment_id')
+        appointment = get_object_or_404(Appointment, id=appointment_id, doctor=doctor)
+        appointment.delete()
+        messages.success(request, 'Appointment canceled successfully!')
+        return redirect('manage_appointments')
+
+    return render(request, 'manage_appointments.html', {'appointments': appointments})
 
 @login_required
 def request_prescription(request, patient_username):

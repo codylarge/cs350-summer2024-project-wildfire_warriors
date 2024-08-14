@@ -30,6 +30,9 @@ def forgot_password_view(request):
     # Logic for forgot password
     return render(request, 'forgot-password.html')
 
+def appointment_success(request):
+    return render(request, 'appointment_success.html')
+
 
 def login_view(request):
     if request.method == 'POST':

@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'css/manage_appointments.css' %}">
+{% endblock %}
+
+{% block title %}
+    Manage Appointments
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Manage Appointments</h2>
+        {% if appointments %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Patient</th>
+                        <th>Reason</th>
+                        <th>Notes</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ appointment.date }}</td>
+                        <td>{{ appointment.patient }}</td>
+                        <td>{{ appointment.reason }}</td>
+                        <td>{{ appointment.notes|default:"N/A" }}</td>
+                        <td>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="appointment_id" value="{{ appointment.id }}">
+                                <button type="submit" class="btn-cancel">Cancel</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No upcoming appointments.</p>
+        {% endif %}
+    </div>
+{% endblock %}

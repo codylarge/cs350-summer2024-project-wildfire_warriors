@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'css/book_appointment.css' %}">
+{% endblock %}
+
+{% block title %}
+    Book Appointment
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Book an Appointment</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Book Appointment</button>
+        </form>
+    </div>
+{% endblock %}
