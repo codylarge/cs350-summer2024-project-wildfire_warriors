@@ -17,8 +17,10 @@ Home
         <div class="booking-section">
             <h2>Book Appointment</h2>
             <div class="booking-box">
-                <form action="/book-appointment/" method="post">
-                    <select name="date" required>
+                <form method="post" action="{% url 'book_appointment' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <select name="date">
                         <option value="">Date</option>
                         <!-- Add date options here -->
                     </select>
@@ -27,11 +29,11 @@ Home
                         <option value="service1">Spokane</option>
                         <!-- Add location options here -->
                     </select>
-                    <select name="service" required>
+                    <select name="service">
                         <option value="">Service</option>
                         <!-- Add service options here -->
                     </select>
-                    <button type="submit">Book Now</button>
+                        <button type="submit">Book Now</button>
                 </form>
             </div>
         </div>
