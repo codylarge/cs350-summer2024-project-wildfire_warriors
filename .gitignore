@@ -1,5 +1,6 @@
 
 healthconnect/db.sqlite3
+*.sqlite3
 *.pyc
 *.pyo
 *.pyd

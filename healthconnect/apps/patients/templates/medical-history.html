@@ -1,21 +1,33 @@
 {% extends 'layout.html' %}
+{% load static %}
 
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'css/medical_history.css' %}">
+{% endblock %}
+
+{% block title %}
+    Medical Record
+{% endblock %}
 {% block content %}
-  <h2>Medical Records</h2>
-  <table>
-    <tr>
-      <th>Date</th>
-      <th>Condition</th>
-      <th>Remedy</th>
-      <th>Prescription</th>
-    </tr>
-    {% for record in records %}
-    <tr>
-      <td>{{ record.date }}</td>
-      <td>{{ record.condition }}</td>
-      <td>{{ record.remedy }}</td>
-      <td>{{ record.prescription }}</td>
-    </tr>
-    {% endfor %}
-  </table>
+    <main>
+        <div class="container">
+            <h2>Medical History</h2>
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Condition</th>
+                    <th>Remedy</th>
+                    <th>Prescription</th>
+                </tr>
+                {% for record in records %}
+                <tr>
+                    <td>{{ record.date }}</td>
+                    <td>{{ record.condition }}</td>
+                    <td>{{ record.remedy }}</td>
+                    <td>{{ record.prescription }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </main>
 {% endblock %}

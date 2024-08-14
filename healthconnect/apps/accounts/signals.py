@@ -18,7 +18,6 @@ def create_user(sender, instance, created, **kwargs):
         role = instance.role
         if role == 'patient':
             patient = Patient.objects.create(user=instance)
-            MedicalRecord.objects.create(patient=patient, date=timezone.now()) 
         elif role == 'doctor':
             Doctor.objects.create(user=instance)
         elif role == 'nurse':

@@ -1,9 +1,16 @@
 {% extends "layout.html" %}
-
+{% load static %}
+{% block extra_styles%}<link rel="stylesheet" href="{% static 'css/list_patients.css' %}">{% endblock %}
+{% block title %}List of Patients{% endblock %}
 {% block content %}
-    {% for patient in patients %}
-        <p>Patient Username: {{ patient.username }}</p>
-        <p>Patient Name: {{ patient.full_name }}</p>
-        <a href="{% url 'update_medical_record' patient.username %}">Update Records for {{ patient.full_name }}</a>
-    {% endfor %}
+    <div class="container">
+        <h1>Manage Medical Records</h1>
+        {% for patient in patients %}
+            <div class="patient-entry">
+                <p><strong>Patient Username:</strong> {{ patient.username }}</p>
+                <p><strong>Patient Name:</strong> {{ patient.full_name }}</p>
+                <a href="{% url 'update_medical_record' patient.username %}">Update Records for {{ patient.full_name }}</a>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
