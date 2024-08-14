@@ -1,10 +1,11 @@
 from django.shortcuts import render
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import MedicalRecord   
+from .models import MedicalRecord, Patient   
 from apps.doctors.models import Doctor
-from .models import Patient
 from apps.accounts.models import CustomUser
+from .forms import AppointmentForm
 
 
 # NOT @login required, this will be allowed by all and a request to login will be made when user selects a service
@@ -16,10 +17,22 @@ def patient_services(request):
     
     return render(request, 'select_doctor.html', {'patient': patient})
     
+    
 # Create your views here.
 @login_required
 def book_appointment(request):
-    return render(request, 'book-appointment.html')
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            appointment = form.save(commit=False)
+            appointment.patient = request.user.patient  # Assuming user has a related Patient profile
+            appointment.save()
+            messages.success(request, 'Appointment booked successfully!')
+            return redirect('appointment_success')  # Redirect to the success page
+    else:
+        form = AppointmentForm()
+
+    return render(request, 'book_appointment.html', {'form': form})
 
 @login_required
 def medical_history(request):
@@ -47,3 +60,5 @@ def select_doctor(request):
     
     return render(request, 'select_doctor.html', {'doctors': doctors})
 
+def appointment_success(request):
+    return render(request, 'appointment_success.html')
