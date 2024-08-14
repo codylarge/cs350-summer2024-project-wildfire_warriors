@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+{% block title %}
+View Prescriptions
+{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'css/view_prescriptions.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>Your Prescriptions</h1>
+<ul>
+    {% for prescription in prescriptions %}
+    <li class="prescription-item">
+        <strong>{{ prescription.drug.name }}</strong> - {{ prescription.amount }} units
+        <p>Prescribed by: Dr. {{ prescription.doctor.user.get_full_name }}</p>
+        <p>Date Prescribed: {{ prescription.date_prescribed }}</p>
+        <p class="{% if prescription.is_approved %}status-approved{% else %}status-pending{% endif %}">
+            Status: {% if prescription.is_approved %}Approved{% else %}Pending{% endif %}
+        </p>
+    </li>
+    {% empty %}
+    <li class="prescription-item">No prescriptions available.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

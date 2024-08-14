@@ -1,7 +1,12 @@
 {% extends 'layout.html' %}
 
+{% load static %}
 {% block title %}
 Review Prescription Requests
+{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'css/review_prescriptions.css' %}">
 {% endblock %}
 
 {% block content %}

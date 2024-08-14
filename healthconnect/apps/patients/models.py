@@ -3,20 +3,11 @@ from apps.accounts.models import CustomUser
 from apps.doctors.models import Doctor
 from django.utils import timezone
 
-# Create your models here.
 class Patient(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     medical_history = models.ManyToManyField('MedicalRecord', blank=True, related_name='patients')
     primary_doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True, related_name='patients')
     prescriptions = models.ManyToManyField('pharmacists.Prescription', blank=True, related_name='patients')
-    
-    @property
-    def full_name(self):
-        return self.user.get_full_name()
-    
-    @property
-    def username(self):
-        return self.user.username
     
     def __str__(self):
         return self.user.username

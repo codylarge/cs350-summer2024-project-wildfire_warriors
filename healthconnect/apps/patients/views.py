@@ -5,7 +5,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import MedicalRecord, Patient   
 from apps.doctors.models import Doctor
 from apps.accounts.models import CustomUser
+from apps.pharmacists.models import Prescription
 from .forms import AppointmentForm
+
 
 
 # NOT @login required, this will be allowed by all and a request to login will be made when user selects a service
@@ -59,6 +61,16 @@ def select_doctor(request):
         return redirect('profile')
     
     return render(request, 'select_doctor.html', {'doctors': doctors})
+
+def view_prescriptions(request):
+    # Get the logged-in patient
+    patient = request.user.patient
+
+    # Filter prescriptions for this patient
+    prescriptions = Prescription.objects.filter(patient=patient)
+
+    # Render the template with the prescriptions
+    return render(request, 'view_prescriptions.html', {'prescriptions': prescriptions})
 
 def appointment_success(request):
     return render(request, 'appointment_success.html')
