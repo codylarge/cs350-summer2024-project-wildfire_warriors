@@ -1,5 +1,18 @@
-<h1>Request Prescription for {{ patient.full_name }}</h1>
-<form method="post">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Submit Prescription</button>
-</form>
+{% extends "layout.html" %}
+{% load static %}
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'css/request_prescription.css' %}">
+{% endblock %}
+{% block title %}Request Prescription{% endblock %}
+{% block content %}
+    <main>
+        <div class="container">
+            <h1>Request Prescription for {{ patient.full_name }}</h1>
+            <form class="prescription_form" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="pres_button"type="submit">Submit Prescription</button>
+            </form>
+        </div>
+    </main>
+{% endblock %}

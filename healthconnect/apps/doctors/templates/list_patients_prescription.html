@@ -1,11 +1,17 @@
-<h1>Your Patients</h1>
-<ul>
-  {% for patient in patients %}
-  <li>
-    {{ patient.full_name }} -
-    <a href="{% url 'request_prescription' patient.user.username %}"
-      >Request Prescription</a
-    >
-  </li>
-  {% endfor %}
-</ul>
+{% extends "layout.html" %}
+{% load static %}
+{% block extra_styles%}<link rel="stylesheet" href="{% static 'css/list_patients.css' %}">{% endblock %}
+{% block title %}Your Patients{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h1>Request Prescription</h1>
+    {% for patient in patients %}
+        <div class="patient-entry">
+            <p><strong>Patient Username:</strong> {{ patient.username }}</p>
+            <p><strong>Patient Name:</strong> {{ patient.full_name }}</p>
+            <a href="{% url 'request_prescription' patient.username %}">Request prescription for {{ patient.full_name }}</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
