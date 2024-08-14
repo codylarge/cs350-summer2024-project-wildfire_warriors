@@ -73,11 +73,7 @@ def profile(request):
             user_info['primary_doctor'] = 'No primary doctor assigned.'
 
     else:
-        try:
-            staff_profile = StaffProfile.objects.get(user=user)
-            user_info['role'] = staff_profile.role
-        except StaffProfile.DoesNotExist:
-            user_info['role'] = 'No role available.'
+        user_info['role'] = user.role
 
     return render(request, 'profile.html', {'user_info': user_info})
 
