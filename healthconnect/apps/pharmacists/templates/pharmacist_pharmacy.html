@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block title %}
+Pharmacy
+{% endblock %}
+{% block content %}
+<h1>Pharmacy</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Patient</th>
+            <th>Medication</th>
+            <th>Amount</th>
+            <th>Date Prescribed</th>
+            <th>Filled</th>
+            <th>Last Filled</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prescription in prescriptions %}
+        <tr>
+            <td>{{ prescription.patient.full_name }}</td>
+            <td>{{ prescription.drug.name }}</td>
+            <td>{{ prescription.amount }}</td>
+            <td>{{ prescription.date_prescribed }}</td>
+            <td>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="checkbox" name="filled" onchange="this.form.submit()" {% if prescription.filled %}checked{% endif %}>
+                    <input type="hidden" name="prescription_id" value="{{ prescription.id }}">
+                </form>
+            </td>
+            <td>{{ prescription.last_filled }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

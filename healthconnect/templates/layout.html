@@ -7,6 +7,22 @@
     <title>{% block title %}Title{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     {% block extra_styles %}{% endblock %}
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">

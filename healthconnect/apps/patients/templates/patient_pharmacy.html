@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block title %}
+My Prescriptions
+{% endblock %}
+{% block content %}
+<h1>My Prescriptions</h1>
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th style="padding: 10px; text-align: center;">Medication</th>
+            <th style="padding: 10px; text-align: center;">Amount</th>
+            <th style="padding: 10px; text-align: center;">Date Prescribed</th>
+            <th style="padding: 10px; text-align: center;">Filled</th>
+            <th style="padding: 10px; text-align: center;">Last Filled</th>
+            <th style="padding: 10px; text-align: center;">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prescription in prescriptions %}
+        <tr>
+            <td style="padding: 10px; text-align: center;">{{ prescription.drug.name }}</td>
+            <td style="padding: 10px; text-align: center;">{{ prescription.amount }}</td>
+            <td style="padding: 10px; text-align: center;">{{ prescription.date_prescribed }}</td>
+            <td style="padding: 10px; text-align: center;">
+                <input type="checkbox" disabled {% if prescription.filled %}checked{% endif %}>
+            </td>
+            <td style="padding: 10px; text-align: center;">{{ prescription.last_filled }}</td>
+            <td style="padding: 10px; text-align: center;">
+                {% if prescription.filled %}
+                <form method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="prescription_id" value="{{ prescription.id }}">
+                    <button type="submit" name="request_refill">Request Refill</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

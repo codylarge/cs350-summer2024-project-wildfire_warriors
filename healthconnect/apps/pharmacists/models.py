@@ -3,7 +3,7 @@ from apps.accounts.models import CustomUser
 from django.conf import settings
 from apps.doctors.models import Doctor
 from apps.patients.models import Patient
-# Create your models here.
+
 class Pharmacist(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     salary = models.IntegerField(default=0)
@@ -25,6 +25,8 @@ class Prescription(models.Model):
     amount = models.PositiveIntegerField()
     date_prescribed = models.DateTimeField(auto_now_add=True)
     is_approved = models.BooleanField(default=False)
+    filled = models.BooleanField(default=False)
+    last_filled = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.patient.full_name} - {self.drug.name} ({self.amount})"

@@ -5,6 +5,9 @@ from .forms import CustomRegistrationForm
 from .models import CustomUser, StaffProfile
 from apps.patients.models import Patient
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+from apps.pharmacists.models import Prescription
+from apps.pharmacists.forms import PrescriptionFillForm
 
 
 def register_view(request):
@@ -108,7 +111,35 @@ def services(request):
     else:
         return render(request, 'patient_services.html')
 
+from django.utils import timezone
+
 def pharmacy(request):
-    #custom_user = CustomUser.objects.get(username=request.user.username)
-    #print(f"User: {custom_user}")
-    return render(request, 'pharmacy.html')
+    user = request.user
+    if hasattr(user, 'pharmacist'):
+        prescriptions = Prescription.objects.all()
+        if request.method == 'POST':
+            prescription_id = request.POST.get('prescription_id')
+            prescription = Prescription.objects.get(id=prescription_id)
+            prescription.filled = 'filled' in request.POST
+            if prescription.filled:
+                prescription.last_filled = timezone.now()
+            else:
+                prescription.last_filled = None
+            prescription.save()
+        return render(request, 'pharmacist_pharmacy.html', {'prescriptions': prescriptions})
+    elif hasattr(user, 'patient'):
+        prescriptions = Prescription.objects.filter(patient=user.patient)
+        if request.method == 'POST' and 'request_refill' in request.POST:
+            prescription_id = request.POST.get('prescription_id')
+            prescription = Prescription.objects.get(id=prescription_id)
+            prescription.filled = False
+            prescription.save()
+        return render(request, 'patient_pharmacy.html', {'prescriptions': prescriptions})
+    elif hasattr(user, 'doctor'):
+        prescriptions = Prescription.objects.select_related('patient', 'drug').all()
+        return render(request, 'doctor_pharmacy.html', {'prescriptions': prescriptions})
+    elif hasattr(user, 'nurse'):
+        prescriptions = Prescription.objects.select_related('patient', 'drug').all()
+        return render(request, 'nurse_pharmacy.html', {'prescriptions': prescriptions})
+    else:
+        return render(request, 'patient_pharmacy.html')
